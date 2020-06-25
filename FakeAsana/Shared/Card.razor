@@ -1,0 +1,31 @@
+﻿<div class="mycard" @onclick="OnClick" @onmousedown="OnMouseDown" @onmousemove="OnMouseMove" @onmouseup="OnMouseUp">
+    <strong>Title</strong><br />
+    <span>description</span>
+</div>
+
+@code {
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public EventCallback OnMouseDown { get; set; }
+    [Parameter] public EventCallback OnMouseMove { get; set; }
+    [Parameter] public EventCallback OnMouseUp { get; set; }
+}
+
+<style>
+    .mycard {
+        background-color: skyblue;
+        border: dotted 2px darkblue;
+        margin: 20px;
+        padding: 5px;
+        border-radius: 0.5em;
+    }
+
+        .mycard:hover {
+            background-color: orange;
+        }
+</style>
+
+
+@*
+    // https://developer.mozilla.org/ja/docs/Web/API/Element/mousemove_event
+    // https://docs.microsoft.com/ja-jp/aspnet/core/blazor/components/event-handling?view=aspnetcore-3.1
+*@

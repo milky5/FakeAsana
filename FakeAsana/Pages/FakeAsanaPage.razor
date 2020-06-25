@@ -1,0 +1,31 @@
+﻿@page "/"
+
+<h3>FakeAsana</h3>
+
+@for (int i = 0; i < 10; i++)
+{
+    <Card OnClick="@(() => CardClick())" OnMouseDown="@(()=>CardMouseDown())" OnMouseMove="@(()=>CardMouseMove())" OnMouseUp="@(()=>CardMouseUp())"></Card>
+}
+
+
+@code {
+    private async Task CardClick()
+    {
+        System.Console.WriteLine("click");
+    }
+
+    private async Task CardMouseDown()
+    {
+        System.Console.WriteLine("mouse down");
+    }
+
+    private async Task CardMouseMove()
+    {
+        System.Console.WriteLine("mouse move");
+    }
+
+    private async Task CardMouseUp()
+    {
+        System.Console.WriteLine("mouse up");
+    }
+}
