@@ -1,13 +1,16 @@
-﻿<div class="mycard" @onclick="OnClick" @onmousedown="OnMouseDown" @onmousemove="OnMouseMove" @onmouseup="OnMouseUp">
+﻿<div class="mycard" @ref="ID" @onclick="OnClick" @onmousedown="OnMouseDown" @onmousemove="OnMouseMove" @onmouseup="OnMouseUp" @onmouseover="OnMouseOver" @onmouseout="OnMouseOver">
     <strong>Title</strong><br />
     <span>description</span>
 </div>
 
 @code {
+    [Parameter] public ElementReference ID { get; set; }
     [Parameter] public EventCallback OnClick { get; set; }
     [Parameter] public EventCallback OnMouseDown { get; set; }
     [Parameter] public EventCallback OnMouseMove { get; set; }
     [Parameter] public EventCallback OnMouseUp { get; set; }
+    [Parameter] public EventCallback OnMouseOver { get; set; }
+    [Parameter] public EventCallback OnMouseOut { get; set; }
 }
 
 <style>

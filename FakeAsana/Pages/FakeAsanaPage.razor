@@ -4,7 +4,8 @@
 
 @for (int i = 0; i < 10; i++)
 {
-    <Card OnClick="@(() => CardClick())" OnMouseDown="@(()=>CardMouseDown())" OnMouseMove="@(()=>CardMouseMove())" OnMouseUp="@(()=>CardMouseUp())"></Card>
+
+    <Card OnClick="@(() => CardClick())" OnMouseDown="@(()=>CardMouseDown())" OnMouseMove="@(()=>CardMouseMove())" OnMouseUp="@(()=>CardMouseUp())" OnMouseOver="@(()=>CardMouseOver())" OnMouseOut="@(()=>CardMouseOut())" ></Card>
 }
 
 
@@ -27,5 +28,15 @@
     private async Task CardMouseUp()
     {
         System.Console.WriteLine("mouse up");
+    }
+
+    private async Task CardMouseOver()
+    {
+        System.Console.WriteLine("mouse over");
+    }
+
+    private async Task CardMouseOut()
+    {
+        System.Console.WriteLine("mouse outja");
     }
 }
