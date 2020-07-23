@@ -4,15 +4,20 @@
 
 @for (int i = 0; i < 10; i++)
 {
-
-    <Card OnClick="@(() => CardClick())" OnMouseDown="@(()=>CardMouseDown())" OnMouseMove="@(()=>CardMouseMove())" OnMouseUp="@(()=>CardMouseUp())" OnMouseOver="@(()=>CardMouseOver())" OnMouseOut="@(()=>CardMouseOut())" ></Card>
+    var card = new Card();
+    card.MyRef = i;
+    card.Name = i.ToString()+"さん";
+    <Card @ref="card" OnClick="@(() => CardClick(card))" OnMouseDown="@(()=>CardMouseDown())" OnMouseMove="@(()=>CardMouseMove())" OnMouseUp="@(()=>CardMouseUp())" OnMouseOver="@(()=>CardMouseOver())" OnMouseOut="@(()=>CardMouseOut())" ></Card>
+    Cards.Add(card);
 }
 
 
 @code {
-    private async Task CardClick()
+    private List<Card> Cards = new List<Card>();
+
+    private async Task CardClick(Card card)
     {
-        System.Console.WriteLine("click");
+        System.Console.WriteLine($"click {card.MyRef}, name {card.Name}");
     }
 
     private async Task CardMouseDown()
