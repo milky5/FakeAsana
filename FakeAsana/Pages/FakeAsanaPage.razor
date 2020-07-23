@@ -7,7 +7,7 @@
     var card = new Card();
     card.MyRef = i;
     card.Name = i.ToString()+"さん";
-    <Card @ref="card" OnClick="@(() => CardClick(card))" OnMouseDown="@(()=>CardMouseDown())" OnMouseMove="@(()=>CardMouseMove())" OnMouseUp="@(()=>CardMouseUp())" OnMouseOver="@(()=>CardMouseOver())" OnMouseOut="@(()=>CardMouseOut())" ></Card>
+    <Card @ref="card" OnClick="@(() => CardClick(card))" OnMouseDown="@(()=>CardMouseDown(card))" OnMouseMove="@(()=>CardMouseMove(card))" OnMouseUp="@(()=>CardMouseUp(card))" OnMouseOver="@(()=>CardMouseOver(card))" OnMouseOut="@(()=>CardMouseOut(card))" ></Card>
     Cards.Add(card);
 }
 
@@ -20,28 +20,52 @@
         System.Console.WriteLine($"click {card.MyRef}, name {card.Name}");
     }
 
-    private async Task CardMouseDown()
+    private async Task CardMouseDown(Card card)
     {
+        card.IsDragging = true;
         System.Console.WriteLine("mouse down");
     }
 
-    private async Task CardMouseMove()
+    private async Task CardMouseMove(Card card)
     {
-        System.Console.WriteLine("mouse move");
+        if (card.IsDragging)
+        {
+            System.Console.WriteLine("dragging");
+        }
+        else
+        {
+            System.Console.WriteLine("mouse move kasanatteruyo!!");
+        }
     }
 
-    private async Task CardMouseUp()
+    private async Task CardMouseUp(Card card)
     {
+        card.IsDragging = false;
         System.Console.WriteLine("mouse up");
     }
 
-    private async Task CardMouseOver()
+    private async Task CardMouseOver(Card card)
     {
-        System.Console.WriteLine("mouse over");
+        // カーソルと他エレメントが重なった時。つまりエレメント同士はとっくに重なってた状態
+        if (card.IsDragging)
+        {
+            System.Console.WriteLine("mouse over(in)");
+        }
+        else
+        {
+            System.Console.WriteLine("kasanattayo!!");
+        }
     }
 
-    private async Task CardMouseOut()
+    private async Task CardMouseOut(Card card)
     {
-        System.Console.WriteLine("mouse outja");
+        if (card.IsDragging)
+        {
+            System.Console.WriteLine("mouse out");
+        }
+        else
+        {
+            System.Console.WriteLine("kasanari kaijo!!");
+        }
     }
 }
