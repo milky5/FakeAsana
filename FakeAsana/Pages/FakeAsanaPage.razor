@@ -22,50 +22,57 @@
 
     private async Task CardMouseDown(Card card)
     {
-        card.IsDragging = true;
-        System.Console.WriteLine("mouse down");
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+        find.IsDragging = true;
+        System.Console.WriteLine($"mouse down {card.MyRef}");
     }
 
     private async Task CardMouseMove(Card card)
     {
-        if (card.IsDragging)
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+        if (find.IsDragging)
         {
-            System.Console.WriteLine("dragging");
+            System.Console.WriteLine($"dragging {card.MyRef}");
         }
         else
         {
-            System.Console.WriteLine("mouse move kasanatteruyo!!");
+            System.Console.WriteLine($"mouse move kasanatteruyo!!");
         }
     }
 
     private async Task CardMouseUp(Card card)
     {
-        card.IsDragging = false;
-        System.Console.WriteLine("mouse up");
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+        find.IsDragging = false;
+        System.Console.WriteLine($"mouse up {card.MyRef}");
     }
 
     private async Task CardMouseOver(Card card)
     {
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+
         // カーソルと他エレメントが重なった時。つまりエレメント同士はとっくに重なってた状態
-        if (card.IsDragging)
+        if (find.IsDragging)
         {
-            System.Console.WriteLine("mouse over(in)");
+            System.Console.WriteLine($"mouse over(in) {card.MyRef}");
         }
         else
         {
-            System.Console.WriteLine("kasanattayo!!");
+            System.Console.WriteLine($"kasanattayo!! {card.MyRef}");
         }
     }
 
     private async Task CardMouseOut(Card card)
     {
-        if (card.IsDragging)
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+
+        if (find.IsDragging)
         {
-            System.Console.WriteLine("mouse out");
+            System.Console.WriteLine($"mouse out {card.MyRef}");
         }
         else
         {
-            System.Console.WriteLine("kasanari kaijo!!");
+            System.Console.WriteLine($"kasanari kaijo!! {card.MyRef}");
         }
     }
 }
