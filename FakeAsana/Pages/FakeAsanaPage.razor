@@ -7,7 +7,7 @@
     var card = new Card();
     card.MyRef = i;
     card.Name = i.ToString()+"さん";
-    <Card @ref="card" OnClick="@(() => CardClick(card))" OnMouseDown="@(()=>CardMouseDown())" OnMouseMove="@(()=>CardMouseMove())" OnMouseUp="@(()=>CardMouseUp())" OnMouseOver="@(()=>CardMouseOver())" OnMouseOut="@(()=>CardMouseOut())" ></Card>
+    <Card @ref="card" OnClick="@(() => CardClick(card))" OnMouseDown="@(()=>CardMouseDown(card))" OnMouseMove="@(()=>CardMouseMove(card))" OnMouseUp="@(()=>CardMouseUp(card))" OnMouseOver="@(()=>CardMouseOver(card))" OnMouseOut="@(()=>CardMouseOut(card))" ></Card>
     Cards.Add(card);
 }
 
@@ -20,28 +20,59 @@
         System.Console.WriteLine($"click {card.MyRef}, name {card.Name}");
     }
 
-    private async Task CardMouseDown()
+    private async Task CardMouseDown(Card card)
     {
-        System.Console.WriteLine("mouse down");
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+        find.IsDragging = true;
+        System.Console.WriteLine($"mouse down {card.MyRef}");
     }
 
-    private async Task CardMouseMove()
+    private async Task CardMouseMove(Card card)
     {
-        System.Console.WriteLine("mouse move");
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+        if (find.IsDragging)
+        {
+            System.Console.WriteLine($"dragging {card.MyRef}");
+        }
+        else
+        {
+            System.Console.WriteLine($"mouse move kasanatteruyo!!");
+        }
     }
 
-    private async Task CardMouseUp()
+    private async Task CardMouseUp(Card card)
     {
-        System.Console.WriteLine("mouse up");
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+        find.IsDragging = false;
+        System.Console.WriteLine($"mouse up {card.MyRef}");
     }
 
-    private async Task CardMouseOver()
+    private async Task CardMouseOver(Card card)
     {
-        System.Console.WriteLine("mouse over");
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+
+        // カーソルと他エレメントが重なった時。つまりエレメント同士はとっくに重なってた状態
+        if (find.IsDragging)
+        {
+            System.Console.WriteLine($"mouse over(in) {card.MyRef}");
+        }
+        else
+        {
+            System.Console.WriteLine($"kasanattayo!! {card.MyRef}");
+        }
     }
 
-    private async Task CardMouseOut()
+    private async Task CardMouseOut(Card card)
     {
-        System.Console.WriteLine("mouse outja");
+        var find = Cards.Find(childCard => childCard.MyRef == card.MyRef);
+
+        if (find.IsDragging)
+        {
+            System.Console.WriteLine($"mouse out {card.MyRef}");
+        }
+        else
+        {
+            System.Console.WriteLine($"kasanari kaijo!! {card.MyRef}");
+        }
     }
 }
